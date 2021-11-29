@@ -1,0 +1,23 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 30s
+  # scrape_timeout is set to the global default (10s).
+
+scrape_configs:
+  - job_name: prometheus
+    honor_labels: true
+    # scrape_interval is defined by the configured global (15s).
+    # scrape_timeout is defined by the global default (10s).
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+      - targets: [ "localhost:9090", "localhost:9191" ]
+
+
+  - job_name: demo-app
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - demo-app:3000

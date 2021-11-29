@@ -1,0 +1,30 @@
+---
+version: "3.5"
+services:
+  demo-app:
+    build: .
+    environment:
+      - HOST=0.0.0.0
+      - USE_WORKERS=true
+    ports:
+      - "127.0.0.1:3000:3000"
+    networks:
+      - prometheus-demo
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "127.0.0.1:9090:9090"
+    volumes:
+      - ./configs/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    networks:
+      - prometheus-demo
+
+networks:
+  prometheus-demo:
+    name: prometheus-demo
+

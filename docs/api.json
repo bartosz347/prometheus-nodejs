@@ -1,0 +1,51 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Prometheus demo App",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:3000"
+    }
+  ],
+  "paths": {
+    "/slow": {
+      "get": {
+        "description": "Slow endpoint that performs CPU intensive operation using worker threads",
+        "tags": ["api"],
+        "responses": {
+          "200": {"description": "Successful response"},
+          "500": {"description": "Internal server error"}
+        }
+      }
+    },
+    "/slow-blocking": {
+      "get": {
+        "description": "Slow endpoint that performs CPU intensive operation on main thread",
+        "tags": ["api"],
+        "responses": {
+          "200": {"description": "Successful response"}
+        }
+      }
+    },
+    "/fast": {
+      "get": {
+        "description": "Fast endpoint that returns immediately",
+        "tags": ["api"],
+        "responses": {
+          "200": {"description": "Successful response"}
+        }
+      }
+    },
+    "/metrics": {
+      "get": {
+        "description": "Prometheus metrics",
+        "tags": ["metrics"],
+        "responses": {
+          "200": {"description": "Successful response"}
+        }
+      }
+    }
+  }
+}
